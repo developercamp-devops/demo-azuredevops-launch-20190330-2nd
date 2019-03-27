@@ -1,0 +1,50 @@
+{% extends "spaces/layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="https://montemagno.com/content/images/2017/12/IQsRzovW.jpg" style="width: 100px;" />
+            <h2 class="mb-4">
+                Azure Pipeline, Python을 CI, AWS로 CD 프랙티스 Demo
+            </h2>
+            <h5 class="mb-5">이것은 Azure인가 AWS인가. Azure와 Python과 AWS가 함께하는 DevOps 콜라보</h5>
+            {# <p class="lead"></p> #}
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{% url "spaces:post_new" %}" class="btn btn-primary btn-block mb-3">
+                    새 포스팅 쓰기
+                </a>
+
+                <div class="card-columns">
+                    {% for post in post_list %}
+                        <div class="card">
+                            {% if post.photo %}
+                                <img src="{{ post.photo.url }}" class="card-img-top" />
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text">
+                                    {{ post.message }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    {{ post.created_at }}
+                                    by {{ post.author.username }}
+                                </small>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <tr>
+                            <td class="alert alert-info">
+                                등록된 포스팅이 없습니다. :(
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
